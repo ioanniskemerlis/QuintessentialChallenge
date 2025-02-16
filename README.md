@@ -75,3 +75,144 @@ Start your application with:
 npm run dev
 This command starts the server on the port specified in your .env file (default is 3000).
 ```
+
+## API Endpoints
+
+### Authentication Endpoints
+
+- **Register User**
+  - **Method:** POST
+  - **Endpoint:** `/auth/register`
+  - **Description:** Registers a new user.
+  - **Body Example:**
+    ```json
+    {
+      "email": "testuser@example.com",
+      "password": "password123"
+    }
+    ```
+
+- **Login User**
+  - **Method:** POST
+  - **Endpoint:** `/auth/login`
+  - **Description:** Authenticates a user and returns an access token and refresh token.
+  - **Body Example:**
+    ```json
+    {
+      "email": "testuser@example.com",
+      "password": "password123"
+    }
+    ```
+
+- **Refresh Token**
+  - **Method:** POST
+  - **Endpoint:** `/auth/refresh`
+  - **Description:** Generates a new access token using a valid refresh token.
+  - **Body Example:**
+    ```json
+    {
+      "refreshToken": "your_refresh_token_here"
+    }
+    ```
+
+### Protected Routes
+
+- **Get Profile**
+  - **Method:** GET
+  - **Endpoint:** `/profile`
+  - **Description:** Retrieves the authenticated user's profile details.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+
+### Posts Endpoints
+
+- **Create a Post**
+  - **Method:** POST
+  - **Endpoint:** `/posts`
+  - **Description:** Creates a new post for the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+  - **Body Example:**
+    ```json
+    {
+      "content": "This is my first post!"
+    }
+    ```
+
+- **Update a Post**
+  - **Method:** PUT
+  - **Endpoint:** `/posts/{postId}`
+  - **Description:** Updates an existing post if it belongs to the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+  - **Body Example:**
+    ```json
+    {
+      "content": "This is my updated post content."
+    }
+    ```
+
+- **Delete a Post**
+  - **Method:** DELETE
+  - **Endpoint:** `/posts/{postId}`
+  - **Description:** Deletes a post if it belongs to the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+
+- **Fetch My Posts**
+  - **Method:** GET
+  - **Endpoint:** `/posts/my-posts?page=1`
+  - **Description:** Retrieves posts created by the authenticated user (paginated, 5 per page).
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+
+- **Fetch Posts for a Specific User**
+  - **Method:** GET
+  - **Endpoint:** `/posts/user/{userId}?page=1`
+  - **Description:** Retrieves posts for a specified user (paginated, 5 per page).
+
+- **Fetch All Posts**
+  - **Method:** GET
+  - **Endpoint:** `/posts?page=1`
+  - **Description:** Retrieves all posts in chronological order (paginated, 20 per page).
+
+### Comments Endpoints
+
+- **Create a Comment**
+  - **Method:** POST
+  - **Endpoint:** `/comments`
+  - **Description:** Creates a new comment on a post by the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+  - **Body Example:**
+    ```json
+    {
+      "postId": 1,
+      "content": "Great post!"
+    }
+    ```
+
+- **Update a Comment**
+  - **Method:** PUT
+  - **Endpoint:** `/comments/{commentId}`
+  - **Description:** Updates a comment if it belongs to the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+  - **Body Example:**
+    ```json
+    {
+      "content": "Updated comment content."
+    }
+    ```
+
+- **Delete a Comment**
+  - **Method:** DELETE
+  - **Endpoint:** `/comments/{commentId}`
+  - **Description:** Deletes a comment if it belongs to the authenticated user.
+  - **Headers:**  
+    `Authorization: Bearer <your_access_token>`
+
+- **Fetch Comments for a Specific Post**
+  - **Method:** GET
+  - **Endpoint:** `/comments/post/{postId}?page=1`
+  - **Description:** Retrieves comments for a specified post (paginated, 5 comments per page).
