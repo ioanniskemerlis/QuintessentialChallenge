@@ -28,7 +28,7 @@ npm install
 ```
 
 3. Configure Environment Variables
-Create a file named .env in the root of the project.  Your .env file should include variables such as:
+Modify the file named .env in the root of the project.  Your .env file should include variables such as:
 
 ```bash
 
