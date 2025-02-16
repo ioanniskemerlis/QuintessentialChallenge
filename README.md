@@ -23,13 +23,14 @@ cd Quintessential
 2. Install Dependencies
 Install the Node.js dependencies:
 
-bash
-Αντιγραφή
+```bash
 npm install
-3. Configure Environment Variables
-Create a file named .env in the root of the project. Use the provided .env.example as a guide. Your .env file should include variables such as:
+```
 
-ini
+3. Configure Environment Variables
+Create a file named .env in the root of the project.  Your .env file should include variables such as:
+
+```bash
 Αντιγραφή
 PORT=3000
 PGUSER=your_pg_username
@@ -42,6 +43,8 @@ REDIS_PORT=6379
 JWT_SECRET=your_jwt_secret
 ACCESS_TOKEN_EXPIRY=1h
 REFRESH_TOKEN_EXPIRY_SECONDS=604800
+```
+
 Note: Replace the placeholder values with your actual configuration details.
 
 4. Set Up the PostgreSQL Database
@@ -53,27 +56,25 @@ Import the Database Dump:
 Using pgAdmin:
 Open pgAdmin and connect to your PostgreSQL server.
 Right-click on your newly created database and select Restore...
-Choose the SQL dump file from the database folder (e.g., init_db.sql or dummy_data.sql) and run the restore.
-Using the Command Line:
-bash
-Αντιγραφή
-psql -U your_pg_username -d your_database_name -f database/your_db_dump_file.sql
-Replace your_db_dump_file.sql with the actual file name from the database folder.
+Choose the SQL dump file from the database folder and run the restore.
+
+
 5. Ensure Redis is Running
 Make sure that Redis (or Memurai on Windows) is installed and running on the host and port specified in your .env file. You can verify this by connecting to Redis via your preferred client or by using:
 
-bash
-Αντιγραφή
+```bash
+
 redis-cli ping
 It should return PONG.
+```
 
 6. Start the Server
 Start your application with:
 
-bash
-Αντιγραφή
+```bash
 npm run dev
 This command starts the server on the port specified in your .env file (default is 3000).
+```
 
 Usage
 Authentication Endpoints
@@ -81,30 +82,30 @@ Register:
 
 Endpoint: POST /auth/register
 Body Example:
-json
-Αντιγραφή
+```json
 {
   "email": "testuser@example.com",
   "password": "password123"
 }
+
 Description: Creates a new user account.
 Login:
 
 Endpoint: POST /auth/login
 Body Example:
-json
-Αντιγραφή
+```json
 {
   "email": "testuser@example.com",
   "password": "password123"
 }
+
 Description: Authenticates the user and returns an accessToken and refreshToken.
 Refresh Token:
 
 Endpoint: POST /auth/refresh
 Body Example:
-json
-Αντιγραφή
+```json
+
 {
   "refreshToken": "your_refresh_token_here"
 }
@@ -112,19 +113,21 @@ Description: Generates a new access token using a valid refresh token.
 Protected Routes
 For endpoints that require authentication, include the access token in the Authorization header:
 
-makefile
-Αντιγραφή
+
+
 Authorization: Bearer <your_access_token>
 Profile:
 Endpoint: GET /profile
 Description: Retrieves the authenticated user's profile details.
+
+
 Posts Endpoints
 Create a Post:
 
 Endpoint: POST /posts
 Body Example:
 json
-Αντιγραφή
+
 {
   "content": "This is my first post!"
 }
@@ -134,7 +137,7 @@ Update a Post:
 Endpoint: PUT /posts/{postId}
 Body Example:
 json
-Αντιγραφή
+
 {
   "content": "This is my updated post content."
 }
@@ -160,8 +163,8 @@ Create a Comment:
 
 Endpoint: POST /comments
 Body Example:
-json
-Αντιγραφή
+
+
 {
   "postId": 1,
   "content": "Great post!"
